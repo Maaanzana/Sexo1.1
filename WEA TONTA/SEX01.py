@@ -1,4 +1,6 @@
 # Instala esta mierda loco pip install matplotlib y esta tambien pip install numpy-stl
+# https://drive.google.com/drive/folders/1W5tGjsizpBtWrL-kK5X7Xict-GjYPJqE?usp=drive_link DESCARGA ESA MADRE LOCO 
+
 
 import tkinter as tk
 from tkinter import filedialog
@@ -12,7 +14,7 @@ from mpl_toolkits.mplot3d.art3d import Poly3DCollection
 root = tk.Tk()
 root.withdraw() # Oculta la ventana principal vacía
 ruta_stl = filedialog.askopenfilename(
-    title="Selecciona el archivo STL del modelo",
+    title="SELECCIONA LA MIERDA DE STL QUE TE DIJE QUE DESCARGUES EN EL LINK DEL CODIGO PE CAUSA",
     filetypes=[("Archivos STL", "*.stl")]
 )
 
@@ -23,8 +25,6 @@ if not ruta_stl:
 print(f"Cargando modelo: {ruta_stl}...")
 mi_malla = mesh.Mesh.from_file(ruta_stl)
 
-# 2. Centrar el modelo exactamente en el origen (0,0,0) 
-# Esto es vital para que gire sobre su eje como un plato de microondas
 minimos = mi_malla.vectors.reshape(-1, 3).min(axis=0)
 maximos = mi_malla.vectors.reshape(-1, 3).max(axis=0)
 centro = (minimos + maximos) / 2.0
@@ -37,18 +37,16 @@ ax = fig.add_subplot(111, projection='3d')
 ax.set_facecolor('#1e1e1e')
 ax.axis('off')
 
-# Añadir el modelo a la gráfica (con un tono cian futurista)
 coleccion = Poly3DCollection(mi_malla.vectors, facecolors='#00bfff', linewidths=0.2, edgecolors='black', alpha=0.8)
 ax.add_collection3d(coleccion)
 
-# 4. Ajustar la escala para que el modelo no se deforme ni se salga de la pantalla
 escala_max = (maximos - minimos).max() / 2.0
 ax.set_xlim([-escala_max, escala_max])
 ax.set_ylim([-escala_max, escala_max])
 ax.set_zlim([-escala_max, escala_max])
-ax.set_box_aspect([1,1,1]) # Proporción perfecta 1:1:1
+ax.set_box_aspect([1,1,1]) 
 
-# 5. Configurar el Slider en la parte inferior
+
 plt.subplots_adjust(bottom=0.15)
 ax_slider = plt.axes([0.2, 0.05, 0.6, 0.03], facecolor='#333333')
 
@@ -64,17 +62,15 @@ slider_angulo = Slider(
 slider_angulo.label.set_color('white')
 slider_angulo.valtext.set_color('white')
 
-# 6. Función de rotación (solo mueve la cámara en el eje horizontal o 'Azimuth')
+
 def rotar_microondas(val):
-    # elev = 15 grados (lo miras un poquito desde arriba)
-    # azim = el valor del slider (el giro horizontal)
     ax.view_init(elev=15, azim=slider_angulo.val)
     fig.canvas.draw_idle()
 
 slider_angulo.on_changed(rotar_microondas)
 
-# Establecer la vista inicial
+
 ax.view_init(elev=15, azim=0)
 
-print("¡Listo! Usa el deslizador para girarlo.")
+print("PENE POLLA")
 plt.show()
